@@ -1,0 +1,159 @@
+import usePageTitle from "@/hooks/use-page-title";
+import { useState } from "react";
+// import {
+//   FormControl,
+//   FormField,
+//   FormItem,
+//   FormLabel,
+//   FormMessage,
+// } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ArrowLeft2, Buildings2 } from "iconsax-react";
+import { PricingForm } from "./children/add-asset-form/pricing";
+import BasicForm from "./children/add-asset-form/basic";
+import MilestonesForm from "./children/add-asset-form/milestone";
+
+const steps = ["Basic", "Pricing", "Milestones", "Submit"];
+
+const AddAssetPage = () => {
+  usePageTitle("Add New Asset");
+  const [step, setStep] = useState(0);
+
+  const nextStep = async () =>
+    setStep((prev) => Math.min(prev + 1, steps.length - 1));
+
+  const prevStep = () => setStep((prev) => Math.max(prev - 1, 0));
+
+  // const onSubmit = (data: FormData) => {
+  //   toast.success("Asset submitted!");
+  //   console.log("Full Submission:", { data, ...files });
+  // };
+
+  const renderStep = () => {
+    switch (step) {
+      case 0:
+        return <BasicForm onFinish={nextStep} />;
+      case 1:
+        return <PricingForm onFinish={nextStep} onPrevious={prevStep} />;
+      case 2:
+        return <MilestonesForm onFinish={nextStep} onPrevious={prevStep} />;
+      case 3:
+        return (
+          <div className="text-center">
+            <p className="text-lg font-medium mb-4">Review and Submit</p>
+            <pre className="bg-gray-100 p-4 text-left rounded">
+              {/* {JSON.stringify(form.getValues(), null, 2)} */}
+            </pre>
+          </div>
+        );
+    }
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto space-y-6">
+      <div className="flex gap-3 text-gray-500 items-center font-semibold">
+        <div className="bg-gray-100 border border-gray-200 rounded-full p-2">
+          <ArrowLeft2 color="#888888" size={18} />
+        </div>
+        <span>Add New Asset</span>
+      </div>
+
+      <Select>
+        <SelectTrigger className="w-[320px]">
+          <SelectValue placeholder="Select a property type" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="React Estate">
+            <Buildings2 color="#888888" size={32} /> React Estate
+          </SelectItem>
+          <SelectItem value="Land">
+            <Buildings2 color="#888888" size={32} /> Land
+          </SelectItem>
+        </SelectContent>
+      </Select>
+      {/* <FormField
+        // control={form.control}
+        name="propertyType"
+        render={({ field }) => (
+          <FormItem>
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormControl>
+                <SelectTrigger className="w-[320px]">
+                  <SelectValue placeholder="Select a property type" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                <SelectItem value="React Estate">
+                  <Buildings2 color="#888888" size={32} /> React Estate
+                </SelectItem>
+                <SelectItem value="Land">
+                  <Buildings2 color="#888888" size={32} /> Land
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        )}
+      /> */}
+
+      <div className="flex items-center gap-8 text-sm">
+        {steps.map((label, index) => (
+          <span
+            key={label}
+            className={`${
+              step === index
+                ? "text-green-600 font-medium"
+                : index < step
+                  ? "bggray-400 text-gray-700"
+                  : " text-gray-400"
+            }`}
+          >
+            ● {label}
+          </span>
+        ))}
+      </div>
+      {/* select */}
+      {/* Step Title */}
+      <h2 className="text-xl font-semibold">{steps[step]}</h2>
+
+      {/* Step Form */}
+      {renderStep()}
+
+      {/* Navigation buttons */}
+      {/* <div className="flex justify-end gap-3 pt-4">
+        {step > 0 && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={prevStep}
+            className="rounded-full border-gray-400 text-gray-00"
+          >
+            Back
+          </Button>
+        )}
+        {step < steps.length - 1 ? (
+          <Button type="button" onClick={nextStep} className="rounded-full ">
+            Save & Continue
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            className="rounded-full bg-green-600 text-white"
+          >
+            Submit Asset
+          </Button>
+        )}
+      </div> */}
+    </div>
+  );
+
+  return <>{/* <AddAssetForm /> */}</>;
+};
+
+export default AddAssetPage;
