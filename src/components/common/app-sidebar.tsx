@@ -13,14 +13,16 @@ import {
 } from "@/components/ui/sidebar";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Link, LinkProps } from "@tanstack/react-router";
 import config from "@/config/app";
 import IMAGES from "@/assets/images";
+import { AppRoutes } from "@/types/route.type";
+import { ROUTES } from "@/config/route";
+import { Link } from "react-router-dom";
 
 // Menu items.
 type MenuItem = {
   title: string;
-  to: LinkProps["to"];
+  to: AppRoutes;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
@@ -32,32 +34,32 @@ const items: MenuItems = {
   DEVELOPER: [
     {
       title: "Dashboard",
-      to: "/dashboard/developer",
+      to: ROUTES.DASHBOARD.DEVELOPER.HOME,
       icon: Home,
     },
     {
       title: "Portfolio",
-      to: "/",
+      to: ROUTES.DASHBOARD.DEVELOPER.PORTFOLIO,
       icon: ChartSquare,
     },
     {
       title: "Listings",
-      to: "/",
+      to: ROUTES.DASHBOARD.DEVELOPER.LISTING,
       icon: ChartSquare,
     },
     {
       title: "Milestones",
-      to: "/",
+      to: ROUTES.DASHBOARD.DEVELOPER.MILESTONE,
       icon: Star1,
     },
     {
       title: "Wallet",
-      to: "/",
+      to: ROUTES.DASHBOARD.DEVELOPER.WALLET,
       icon: Wallet3,
     },
     {
       title: "Profile",
-      to: "/",
+      to: ROUTES.DASHBOARD.DEVELOPER.PROFILE,
       icon: User,
     },
   ],
@@ -66,8 +68,8 @@ const items: MenuItems = {
 
 export function AppSidebar() {
   const menuItems = items["DEVELOPER"] || []; // Get the menu for the role
-
   const navIsActive = (to: string) => window.location.pathname === to;
+  // const navIsActive = (to: string) => window.location.pathname.startsWith(to);
 
   return (
     <Sidebar className="p-6 bg-[#F6F6F6] !rounded-r-[20px] !border-r-[#E4E4E4]">

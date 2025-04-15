@@ -5,6 +5,7 @@ interface AppState {
   openNavDrawer: boolean;
   hasSeenIntro: boolean;
   dashboardTitle: string;
+  subtitle: string | null;
   dashboardDrawerFooterContent: React.ReactNode | null;
   isSidebarOpen: boolean;
   userEmail: string | null;
@@ -15,6 +16,7 @@ export const defaultApp: AppState = {
   openNavDrawer: false,
   hasSeenIntro: false,
   dashboardTitle: "",
+  subtitle: null,
   dashboardDrawerFooterContent: null,
   isSidebarOpen: false,
   userEmail: null,

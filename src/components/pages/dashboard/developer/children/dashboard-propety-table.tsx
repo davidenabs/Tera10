@@ -34,9 +34,9 @@ const DashboardPropertyTable = () => {
   //     React.useState<VisibilityState>({});
   //   const [rowSelection, setRowSelection] = React.useState({});
 
-    const filteredData = propertyData.filter((record) =>
-      record.property.toLowerCase().includes(search.toLowerCase())
-    );
+  const filteredData = propertyData.filter((record) =>
+    record.property.toLowerCase().includes(search.toLowerCase())
+  );
 
   // Table 1 (All)
   const [sorting1, setSorting1] = React.useState<SortingState>([]);
@@ -146,16 +146,16 @@ const DashboardPropertyTable = () => {
       {/* Tabs */}
       <Tabs defaultValue="all" className="mb4">
         <div className="mb-4 w-full">
-          <TabsList>
+          <TabsList className="bg-transparent">
             <TabsTrigger
               value="all"
-              className="data-[state=active]:border-b-2 !shadow-none md:w-[146px] justify-start data-[state=active]:border-b-[#FFAB04] rounded-none py-5"
+              className="data-[state=active]:border-b-2 !shadow-none md:w-[146px] justify-start data-[state=active]:border-b-[#FFAB04] bg- rounded-none py-5 text-[#8E8E93] data-[state=active]:text-black"
             >
               All
             </TabsTrigger>
             <TabsTrigger
               value="cosgroove"
-              className="data-[state=active]:border-b-2 !shadow-none md:w-[146px] justify-start data-[state=active]:border-b-[#FFAB04] rounded-none py-5"
+              className="data-[state=active]:border-b-2 bg- !shadow-none md:w-[146px] justify-start data-[state=active]:border-b-[#FFAB04] rounded-none py-5 text-[#8E8E93] data-[state=active]:text-black"
             >
               Cosgroove
             </TabsTrigger>

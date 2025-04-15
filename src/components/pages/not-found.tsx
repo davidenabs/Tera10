@@ -1,10 +1,9 @@
 import { ArrowLeft } from "iconsax-react";
 import { Button } from "../ui/button";
-import { useCanGoBack, useRouter } from "@tanstack/react-router";
+import { useNavigate } from "react-router-dom";
 
 const NotFoundPage = () => {
-  const router = useRouter();
-  const canGoBack = useCanGoBack();
+  const navigate = useNavigate();
   return (
     <div className="flex min-h-screen flex-col bg-[#F8FAFC]">
       <div className="flex grow items-center px-6 xl:px-10">
@@ -19,17 +18,15 @@ const NotFoundPage = () => {
             happens to the best of us. Just click the button below to get back
             on track.
           </p>
-          {!canGoBack ? (
-            <Button
-              className="mt-8 !px-4 !py-2 !rounded-full !w-fit"
-              onClick={() => router.history.back()}
-            >
-              <span className="flex gap-2 items-center">
-                <ArrowLeft size={32} color="#000000" className="h-4 w-4" />
-                <span>Go Back</span>
-              </span>
-            </Button>
-          ) : null}
+          <Button
+            className="mt-8 !px-4 !py-2 !rounded-full !w-fit"
+            onClick={() => navigate(-1)}
+          >
+            <span className="flex gap-2 items-center">
+              <ArrowLeft size={32} color="#000000" className="h-4 w-4" />
+              <span>Go Back</span>
+            </span>
+          </Button>
         </div>
       </div>
     </div>

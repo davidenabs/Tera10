@@ -32,12 +32,12 @@ const AppModal: React.FC<AppModalProps> = ({
     <Dialog open={open} onOpenChange={setOpen} modal={modal}>
       <DialogContent
         className={cn(
-          "sm:max-w-lg w-ull p-0 transition-all duration-300 ease-in-out",
+          "sm:max-w-lg w-ull p-0 transition-all duration-300 ease-in-out border-[#D0D5DD]",
           className
         )}
       >
         {title && (
-          <DialogTitle className="border-b px-6 py-3 text-base text-[#8E8E93]">
+          <DialogTitle className="border-b border-[#D0D5DD] px-6 py-3 text-base text-[#8E8E93]">
             {title}
           </DialogTitle>
         )}

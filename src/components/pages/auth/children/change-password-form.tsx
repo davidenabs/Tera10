@@ -12,7 +12,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { useNavigate } from "@tanstack/react-router";
+import { ROUTES } from "@/config/route";
+import { useNavigation } from "@/utils/navigation";
 
 const ChangePasswordSchema = z
   .object({
@@ -26,7 +27,7 @@ const ChangePasswordSchema = z
   });
 
 const ChangePasswordForm = () => {
-  const navigate = useNavigate();
+  const { goTo } = useNavigation();
   const form = useForm<z.infer<typeof ChangePasswordSchema>>({
     resolver: zodResolver(ChangePasswordSchema),
     defaultValues: {
@@ -39,7 +40,7 @@ const ChangePasswordForm = () => {
   function onSubmit(data: z.infer<typeof ChangePasswordSchema>) {
     toast.success("Password changed successfully!");
     console.log(data);
-    navigate({ to: "/auth/login" });
+    goTo(ROUTES.AUTH.LOGIN);
   }
 
   return (

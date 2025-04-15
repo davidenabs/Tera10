@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import {
   QueryClient,
@@ -7,41 +8,34 @@ import {
 } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useSetAtom } from "jotai";
-import { useNavigate } from "@tanstack/react-router";
-import { defaultUser, userAtom, UserState } from "@/stores/user";
+import { defaultUser, userAtom } from "@/stores/user";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
-const logout = (setUser: (user: UserState) => void, navigate: ReturnType<typeof useNavigate>) => {
+const logout = (setUser: (user: typeof defaultUser) => void, navigate: ReturnType<typeof useNavigate>) => {
   toast.error("Unauthorized access, logging out...");
   setUser(defaultUser);
-  navigate({ to: "/auth/login" });
+  navigate("/auth/login");
 };
 
 const errorHandler = (
-  err: unknown, 
-  navigate: ReturnType<typeof useNavigate>, 
-  setUser: (user: UserState) => void
+  err: unknown,
+  navigate: ReturnType<typeof useNavigate>,
+  setUser: (user: typeof defaultUser) => void
 ) => {
   if (err instanceof AxiosError && err.response?.status === 401) {
     logout(setUser, navigate);
   } else {
-    const { error, message, status } = err as unknown as {
-      error: string;
-      message: string;
-      status: number;
-    };
-    if (status === 401) {
-      logout(setUser, navigate);
-    }
+    const { error, message } = err as { error?: string; message?: string };
     if (error === "Unauthorized") {
       logout(setUser, navigate);
     } else {
       if (error && message) {
-        toast.error(error, {
-          description: message,
-        });
-      } else {
+        toast.error(error, { description: message });
+      } else if (message) {
         toast.error(message);
+      } else {
+        toast.error("An unknown error occurred");
       }
     }
   }
@@ -49,39 +43,27 @@ const errorHandler = (
 
 const createQueryClient = (
   navigate: ReturnType<typeof useNavigate>,
-  setUser: (user: UserState) => void
+  setUser: (user: typeof defaultUser) => void
 ) =>
   new QueryClient({
-    // defaultOptions: {
-    //   queries: {
-    //     retry: (failureCount, error: any) => {
-    //       // Don't retry on 401 errors
-    //       if (error instanceof AxiosError && error.response?.status === 401) {
-    //         return false;
-    //       }
-    //       // Retry up to 3 times on other errors
-    //       return failureCount < 3;
-    //     },
-    //   },
-    // },
     queryCache: new QueryCache({
-      onError: (error: unknown) => {
+      onError: (error) => {
         errorHandler(error, navigate, setUser);
       },
     }),
     mutationCache: new MutationCache({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-      onError: (error: unknown, _variables: unknown, _context: unknown, mutation: any) => {
+      onError: (error) => {
         errorHandler(error, navigate, setUser);
       },
     }),
   });
 
-function ReactQueryProvider({ children }: React.PropsWithChildren<object>) {
+function ReactQueryProvider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate();
   const setUser = useSetAtom(userAtom);
+
   const [client] = useState(() => createQueryClient(navigate, setUser));
-  
+
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }
 

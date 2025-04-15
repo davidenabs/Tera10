@@ -12,7 +12,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigation } from "@/utils/navigation";
+import { ROUTES } from "@/config/route";
+import { Link } from "react-router-dom";
 
 const FormSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -20,7 +22,7 @@ const FormSchema = z.object({
 });
 
 const LoginForm = () => {
-  const navigate = useNavigate();
+  const { goTo } = useNavigation();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -32,7 +34,7 @@ const LoginForm = () => {
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast.success("Login successful!");
     console.log(data);
-    navigate({ to: "/dashboard" });
+    goTo(ROUTES.DASHBOARD.DEVELOPER.HOME);
   }
 
   return (
@@ -81,7 +83,7 @@ const LoginForm = () => {
           {/* */}
           <div className="text-right pt-2">
             <Link
-              to="/auth/forgot-password"
+              to={ROUTES.AUTH.FORGET_PASSWORD}
               className="text-sm text-primary hover:underline"
             >
               Forgot password?
@@ -90,10 +92,7 @@ const LoginForm = () => {
         </div>
 
         {/* Login Button */}
-        <Button
-          type="submit"
-          className="w-full rounded-full"
-        >
+        <Button type="submit" className="w-full rounded-full">
           Log in
         </Button>
       </form>

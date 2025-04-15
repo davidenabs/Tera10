@@ -3,7 +3,8 @@ import usePageTitle from "@/hooks/use-page-title";
 import { Box, DocumentCopy, DocumentText, Star, Wallet } from "iconsax-react";
 import { StatCard } from "./children/stat-card";
 import DashboardPropertyTable from "./children/dashboard-propety-table";
-import { useNavigate } from "@tanstack/react-router";
+import { ROUTES } from "@/config/route";
+import { useNavigation } from "@/utils/navigation";
 
 const stats = [
   {
@@ -31,7 +32,7 @@ const stats = [
 
 const DeveloperDashboardPage = () => {
   usePageTitle("Developer’s Dashboard");
-  const navigate = useNavigate();
+  const { goTo } = useNavigation();
 
   return (
     <>
@@ -42,7 +43,7 @@ const DeveloperDashboardPage = () => {
         </Button>
 
         <Button
-          onClick={() => navigate({ to: "/dashboard/developer/add-asset" })}
+          onClick={() => goTo(ROUTES.DASHBOARD.DEVELOPER.ADD_ASSETS)}
           className="!border-[#EBA10E] border rounded-full text-black"
         >
           Add New
@@ -68,7 +69,7 @@ const DeveloperDashboardPage = () => {
           <div className="lg:grid grid-cols-4 gap-4">
             <DashboardPropertyTable />
             {/* Promo Banner */}
-            <div className="w-80 bg-gray-900 h-[595px] rounded-lg overflow-hidden relative lg:flex flex-col hidden">
+            <div className="w-80 md:w-full bg-gray-900 h-[595px] rounded-lg overflow-hidden relative lg:flex flex-col hidden">
               <div className="flex-1 p-6 pt-64 flex flex-col justify-end text-white">
                 <h3 className="text-4xl font-normal mb-2">
                   Unlock Your Project's Potential with Tera10!

@@ -7,8 +7,13 @@ export function AppDashboardNav() {
 
   return (
     <nav className="flex justify-between pb10 p-6">
-      <div className="text-lg font-semibold">
-        {app.dashboardTitle || "Dashboard"}
+      <div className="flex flex-col gap-2">
+        <div className="text-lg font-semibold">
+          {app.dashboardTitle || "Dashboard"}
+        </div>
+        {app.subtitle && (
+          <div className="text-sm -mt-2 text-[#505050]">{app.subtitle}</div>
+        )}
       </div>
 
       <div className="space-x-3 flex items-center">

@@ -1,9 +1,29 @@
-import { Outlet } from "@tanstack/react-router";
+import { AppDashboardNav } from "@/components/common/app-dashboard-nav";
+import { AppSidebar } from "@/components/common/app-sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 
-export default function DashboardLayout() {
+interface props {
+  children: React.ReactNode;
+}
+
+export default function DashboardLayout({ children }: props) {
+  // const cookieStore = await cookies()
+  // const defaultOpen = cookieStore.get("sidebar_state")?.value === "true"
+
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <Outlet />
-    </div>
+    <SidebarProvider className="bg-[#FAFAFA] border-0 ">
+      <AppSidebar />
+      <SidebarInset className="">
+        <SidebarTrigger />
+        <AppDashboardNav />
+        <main className="p-6">
+          {children}
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

@@ -15,7 +15,7 @@ function getNestedValue(obj: any, path: string): any {
 
 function useCheckUserFields(conditions: UseCheckUserFieldParams[]) {
   const [loaded, setLoaded] = React.useState(false);
-  const navigate = useNavigate();
+  const { goTo } = useNavigation();
   const user = useAtomValue(userAtom);
 
   useEffect(() => {

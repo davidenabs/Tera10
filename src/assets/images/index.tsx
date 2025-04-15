@@ -8,6 +8,7 @@ import milestone4 from "./milestone-4.png";
 import authBg from "./auth-bg.svg";
 import appLogo from "./terra-10-logo.svg";
 import CROSGROVE from "./CROSGROVE.svg";
+import EmptyBlock from "./empty-block.png";
 // 
 
 
@@ -21,7 +22,8 @@ const IMAGES = {
   milestone4,
   authBg,
   appLogo,
-  CROSGROVE
+  CROSGROVE,
+  EmptyBlock
 };
 
 export default IMAGES;

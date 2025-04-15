@@ -41,7 +41,7 @@ const BasicForm = ({ onFinish }: { onFinish: () => void }) => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-3xl mx-auto">
           <FormField
             control={form.control}
             name="propertyName"

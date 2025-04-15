@@ -12,14 +12,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigation } from "@/utils/navigation";
 
 const ForgotPasswordSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
 
 const ForgotPasswordForm = () => {
-  const navigate = useNavigate();
+  const { goTo } = useNavigation();
 
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),
@@ -31,7 +31,7 @@ const ForgotPasswordForm = () => {
   function onSubmit(data: z.infer<typeof ForgotPasswordSchema>) {
     toast.success("Password reset link sent to your email!");
     console.log(data);
-    navigate({ to: "/auth/change-password" });
+    goTo("/auth/change-password");
   }
 
   return (
@@ -58,10 +58,7 @@ const ForgotPasswordForm = () => {
         />
 
         {/* Reset Button */}
-        <Button
-          type="submit"
-          className="w-full rounded-full"
-        >
+        <Button type="submit" className="w-full rounded-full">
           Send Reset Link
         </Button>
       </form>
