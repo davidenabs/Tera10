@@ -6,6 +6,7 @@ import NotFoundPage from "@/components/pages/not-found";
 import { ROUTES } from "@/config/route";
 import { authRoutes } from "./auth-route";
 import { developerRoutes } from "./developer-route";
+import { managerRoutes } from "./manager-route";
 
 const AppRoutes = () => {
   // const userType = UserType.SUPERADMIN;
@@ -42,6 +43,19 @@ const AppRoutes = () => {
           />
         ))}
 
+        {managerRoutes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            element={
+              <RouteWrapper
+                element={route.element}
+                layout={route.layout}
+                layoutProps={route.layoutProps}
+              />
+            }
+          />
+        ))}
 
         {/* sharedRoutes */}
         {sharedRoutes.map((route, index) => (

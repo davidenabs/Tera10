@@ -1,4 +1,12 @@
-import { ChartSquare, Home, Star1, User, Wallet3 } from "iconsax-react";
+import {
+  ChartSquare,
+  Home,
+  Logout,
+  Messages1,
+  Star1,
+  User,
+  Wallet3,
+} from "iconsax-react";
 
 import {
   Sidebar,
@@ -17,7 +25,8 @@ import config from "@/config/app";
 import IMAGES from "@/assets/images";
 import { AppRoutes } from "@/types/route.type";
 import { ROUTES } from "@/config/route";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { getUserRoleFromPath } from "@/utils/navigation";
 
 // Menu items.
 type MenuItem = {
@@ -63,11 +72,45 @@ const items: MenuItems = {
       icon: User,
     },
   ],
+  MANAGER: [
+    {
+      title: "Dashboard",
+      to: ROUTES.DASHBOARD.MANAGER.HOME,
+      icon: Home,
+    },
+    {
+      title: "Approvals",
+      to: ROUTES.DASHBOARD.MANAGER.APPROVALS,
+      icon: ChartSquare,
+    },
+    {
+      title: "Market",
+      to: ROUTES.DASHBOARD.MANAGER.MARKETS,
+      icon: ChartSquare,
+    },
+    {
+      title: "Communications",
+      to: ROUTES.DASHBOARD.MANAGER.COMMUNICATION,
+      icon: Messages1,
+    },
+    {
+      title: "Insight",
+      to: ROUTES.DASHBOARD.MANAGER.INSIGHT,
+      icon: Wallet3,
+    },
+    {
+      title: "Profile",
+      to: ROUTES.DASHBOARD.MANAGER.PROFILE,
+      icon: User,
+    },
+  ],
   OTHER: [],
 };
 
 export function AppSidebar() {
-  const menuItems = items["DEVELOPER"] || []; // Get the menu for the role
+  const location = useLocation();
+  const userRole = getUserRoleFromPath(location.pathname, items); // Extract the role dynamically
+  const menuItems = items[userRole] || []; // Get the menu for the role
   const navIsActive = (to: string) => window.location.pathname === to;
   // const navIsActive = (to: string) => window.location.pathname.startsWith(to);
 
@@ -109,7 +152,13 @@ export function AppSidebar() {
                 ) : (
                   <p className="text-gray-500">No menu available</p>
                 )}
+                <div className="text-black pt-80 flex gap-1 items-center">
+                  <Logout color="#000" size={17} />
+                  <Link to={ROUTES.AUTH.LOGIN}>Logout</Link>
+                </div>
               </SidebarMenu>
+              {/* {userRole.toLocaleLowerCase() !== "admin" && <SecurityAlertCard />} */}
+
               {/* {userRole.toLocaleLowerCase() !== "admin" && <SecurityAlertCard />} */}
             </React.Suspense>
           </SidebarGroupContent>
