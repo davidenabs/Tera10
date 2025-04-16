@@ -4,7 +4,7 @@ import { DayPicker } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
+// import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 
 function Calendar({
   className,
@@ -59,22 +59,22 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ className, ...props }) => (
-          <ArrowLeft2
-            color="#666666"
-            size={16}
-            className={cn("size-4", className)}
-            {...props}
-          />
-        ),
-        IconRight: ({ className, ...props }) => (
-          <ArrowRight2
-            color="#666666"
-            size={16}
-            className={cn("size-4", className)}
-            {...props}
-          />
-        ),
+        // IconLeft: ({ className, ...props }) => (
+        //   <ArrowLeft2
+        //     color="#666666"
+        //     size={16}
+        //     className={cn("size-4", className)}
+        //     {...props}
+        //   />
+        // ),
+        // IconRight: ({ className, ...props }) => (
+        //   <ArrowRight2
+        //     color="#666666"
+        //     size={16}
+        //     className={cn("size-4", className)}
+        //     {...props}
+        //   />
+        // ),
       }}
       {...props}
     />

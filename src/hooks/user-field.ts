@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { userAtom } from "@/stores/user";
+// import { useNavigation } from "@/utils/navigation";
 import { useAtomValue } from "jotai";
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface UseCheckUserFieldParams {
   field: string;
@@ -15,7 +16,7 @@ function getNestedValue(obj: any, path: string): any {
 
 function useCheckUserFields(conditions: UseCheckUserFieldParams[]) {
   const [loaded, setLoaded] = React.useState(false);
-  const { goTo } = useNavigation();
+  // const { goTo } = useNavigation();
   const user = useAtomValue(userAtom);
 
   useEffect(() => {
@@ -25,11 +26,13 @@ function useCheckUserFields(conditions: UseCheckUserFieldParams[]) {
       const fieldValue = getNestedValue(userData, field);
       if (fieldValue === undefined) return;
       if (condition(fieldValue)) {
-        navigate(redirectTo);
+        // goTo(redirectTo);
+        console.log(redirectTo);
+        
         break;
       }
     }
-  }, [user, conditions, navigate, loaded]);
+  }, [user, conditions, loaded]);
 
   useEffect(() => {
     setLoaded(true);

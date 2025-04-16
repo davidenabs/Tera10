@@ -1,10 +1,11 @@
-import { UserType } from "@/interface/user";
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import { UserType } from "@/interface/user";
+// import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 interface RoleBasedRouteProps {
-  userType: UserType; // The current user's role
-  allowedRoles: UserType[]; // List of roles allowed to access the route
+  userType: any; // The current user's role
+  allowedRoles: any[]; // List of roles allowed to access the route
 }
 
 const RoleBasedRoute = ({ userType, allowedRoles }: RoleBasedRouteProps) => {

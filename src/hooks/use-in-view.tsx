@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, RefObject } from "react";
+import { useState, useEffect, useRef } from "react";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useInView<T extends Element>(): [any, boolean] {
   const ref = useRef<T>(null);
   const [isInView, setIsInView] = useState(false);
@@ -22,6 +23,7 @@ export function useInView<T extends Element>(): [any, boolean] {
 
     return () => {
       if (ref.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(ref.current);
       }
     };

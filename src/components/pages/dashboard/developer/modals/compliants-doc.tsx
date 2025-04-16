@@ -1,4 +1,12 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 // import { Upload } from "iconsax-react";
@@ -6,10 +14,10 @@ import { toast } from "sonner";
 const ComplianceDocumentUpload = ({
   propertyName = "Greenview Apartments",
 }) => {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<any>([]);
   const [isUploading, setIsUploading] = useState(false);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e: any) => {
     const selectedFiles = Array.from(e.target.files);
     setFiles(selectedFiles);
   };
@@ -26,7 +34,9 @@ const ComplianceDocumentUpload = ({
     setTimeout(() => {
       console.log("Files submitted:", files);
       setIsUploading(false);
-      toast.success("You have successfully created an asset for listing. This would be reviewed shortly and decided upon")
+      toast.success(
+        "You have successfully created an asset for listing. This would be reviewed shortly and decided upon"
+      );
       // Navigate or show success message here
     }, 1500);
   };
@@ -59,11 +69,44 @@ const ComplianceDocumentUpload = ({
               Selected files:
             </p>
             <ul className="text-sm text-gray-600">
-              {files.map((file, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  <span>📄</span> {file.name}
-                </li>
-              ))}
+              {files.map(
+                (
+                  file: {
+                    name:
+                      | string
+                      | number
+                      | bigint
+                      | boolean
+                      | ReactElement<
+                          unknown,
+                          string | JSXElementConstructor<any>
+                        >
+                      | Iterable<ReactNode>
+                      | ReactPortal
+                      | Promise<
+                          | string
+                          | number
+                          | bigint
+                          | boolean
+                          | ReactPortal
+                          | ReactElement<
+                              unknown,
+                              string | JSXElementConstructor<any>
+                            >
+                          | Iterable<ReactNode>
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  },
+                  index: Key | null | undefined
+                ) => (
+                  <li key={index} className="flex items-center gap-2">
+                    <span>📄</span> {file.name}
+                  </li>
+                )
+              )}
             </ul>
           </div>
         )}

@@ -35,4 +35,5 @@ export const milestoneSchema = z.object({
 
 export const milestonesFormSchema = z.object({
   milestones: z.array(milestoneSchema),
+  finish: z.boolean().optional()
 });
