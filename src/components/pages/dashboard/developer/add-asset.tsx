@@ -24,7 +24,7 @@ const steps = ["Basic", "Pricing", "Milestones", "Submit"];
 
 const AddAssetPage = () => {
   usePageTitle("Add New Asset");
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
 
   const nextStep = async () =>
     setStep((prev) => Math.min(prev + 1, steps.length - 1));
