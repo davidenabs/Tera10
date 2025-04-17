@@ -25,7 +25,7 @@ const InvestmentCard: React.FC<InvestmentProps> = ({
 }) => {
   return (
     <Card className="mb-6 border border-gray-200 bg-white rounded-lg shadow-none overflow-hidden">
-      <CardHeader className="p- pb- flex flex-row justify-between items-start">
+      <CardHeader className="p- pb- flex flex-row max-md:flex-col justify-between items-start">
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <Badge

@@ -19,12 +19,15 @@ import { PricingForm } from "./children/add-asset-form/pricing";
 import BasicForm from "./children/add-asset-form/basic";
 import MilestonesForm from "./children/add-asset-form/milestone";
 import PreviewSubmit from "./children/add-asset-form/review";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const steps = ["Basic", "Pricing", "Milestones", "Submit"];
 
 const AddAssetPage = () => {
   usePageTitle("Add New Asset");
   const [step, setStep] = useState(0);
+  const navigate = useNavigate();
 
   const nextStep = async () =>
     setStep((prev) => Math.min(prev + 1, steps.length - 1));
@@ -53,9 +56,13 @@ const AddAssetPage = () => {
     <div className="">
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="flex gap-3 text-gray-500 items-center font-semibold">
-          <div className="bg-gray-100 border border-gray-200 rounded-full p-2">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="bg-gray-100 border border-gray-200 rounded-full p-5"
+          >
             <ArrowLeft2 color="#888888" size={18} />
-          </div>
+          </Button>
           <span>Add New Asset</span>
         </div>
 

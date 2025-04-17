@@ -1,15 +1,6 @@
+import { PropertyData } from "@/types/property.type";
 import { createColumnHelper } from "@tanstack/react-table";
 
-// Define the type for property data
-interface PropertyData {
-  id: number;
-  property: string;
-  unitsAvailable: number | string;
-  stockStatus: "IN STOCK" | "LOW STOCK" | "OUT OF STOCK";
-  sold: number;
-  unitPrice: number;
-  marketChange: string;
-}
 
 // Sample data for the table
 export const propertyData: PropertyData[] = [
@@ -192,7 +183,7 @@ export const columns = [
         <input
           type="checkbox"
           name=""
-          id=""
+          id="select-all-rows"
           checked={table.getIsAllRowsSelected()}
           onChange={(value) => table.toggleAllRowsSelected(!!value)}
           aria-label="Select all"
@@ -204,9 +195,18 @@ export const columns = [
         <input
           type="checkbox"
           name=""
-          id=""
+          id={`row-select-${row.id}`}
           checked={row.getIsSelected()}
-          onChange={(value) => row.toggleSelected(!!value)}
+          onChange={(value) => {
+            try {
+              row.toggleSelected(!!value);
+            } catch (error) {
+              console.error(
+                `Error toggling selection for row ${row.id}:`,
+                error
+              );
+            }
+          }}
           aria-label="Select row"
         />
       </>
@@ -280,6 +280,7 @@ export const cosgroveColumns = ({
     header: ({ table }) => (
       <input
         type="checkbox"
+        id="select-all-rows"
         checked={table.getIsAllRowsSelected()}
         onChange={(e) => table.toggleAllRowsSelected(!!e.target.checked)}
         aria-label="Select all"
@@ -288,6 +289,7 @@ export const cosgroveColumns = ({
     cell: ({ row }) => (
       <input
         type="checkbox"
+        id={`row-select-${row.id}`}
         checked={row.getIsSelected()}
         onChange={(e) => row.toggleSelected(!!e.target.checked)}
         aria-label="Select row"
@@ -302,6 +304,7 @@ export const cosgroveColumns = ({
       const property = info.getValue();
       return (
         <button
+        id={`row-select-${property}`}
           className="text-gray-600 hover:underline"
           onClick={() => onOpen(property)}
         >

@@ -83,9 +83,9 @@ const MilestonePage = () => {
   );
 
   return (
-    <div className="grid grid-cols-5 gap-4">
+    <div className="md:grid grid-cols-5 gap-4">
       {/* Sidebar */}
-      <div className="col-span-2 border-r border-[#E7E9F1] pr-10">
+      <div className="md:col-span-2 md:border-r border-[#E7E9F1] md:pr-10">
         <div className="flex gap-4 items-center mb-6">
           <div className="relative flex-1">
             <SearchNormal
@@ -160,9 +160,10 @@ function MilestoneDetails({ milestone }: { milestone: MilestoneProps }) {
         Cosgrove Greenview Apartments
       </h2>
 
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex max-md:flex-col items-center gap-4 mb-8">
         <div className="mb- relative">
           <select
+            name="phase"
             className="flex items-center justify-between w-64 px-4 py-1 rounded-lg border border-gray-300 text-gray-700 appearance-none"
             onChange={(e) => console.log(e.target.value)}
           >
@@ -207,7 +208,7 @@ function MilestoneDetails({ milestone }: { milestone: MilestoneProps }) {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2 justify-end mt-4">
+            <div className="flex md:flex-wrap gap-2 justify-end mt-4">
               {milestoneItem.images.map((img, imgIndex) => (
                 <div key={imgIndex} className="relative">
                   <img
@@ -225,7 +226,7 @@ function MilestoneDetails({ milestone }: { milestone: MilestoneProps }) {
         </div>
       ))}
 
-      <div className="flex items-center justify-between py-4 border-t border-gray-200 mb-8">
+      <div className="flex max-md:flex-col gap-3 items-center justify-between py-4 border-t border-gray-200 mb-8">
         <div className="flex items-center gap-2">
           <Receipt size={20} className="text-gray-600" color="#4a5565" />
           <span className="font-medium text-gray-700">Milestone Status</span>

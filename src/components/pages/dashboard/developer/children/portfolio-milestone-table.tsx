@@ -18,11 +18,6 @@ import { assetColumns, assetData } from "../tables/milestone";
 
 // export default class PortfolioMilestoneTable
 const PortfolioMilestoneTable = () => {
-  const [search] = React.useState("");
-
-  const filteredData = assetData.filter((record) =>
-    record.assets.toLowerCase().includes(search.toLowerCase())
-  );
 
   // Table 1 (All)
   const [sorting1, setSorting1] = React.useState<SortingState>([]);
@@ -45,7 +40,7 @@ const PortfolioMilestoneTable = () => {
   );
 
   const table = useReactTable({
-    data: filteredData,
+    data: assetData,
     columns: assetColumns,
     onSortingChange: setSorting1,
     onColumnFiltersChange: setColumnFilters1,

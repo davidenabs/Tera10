@@ -8,7 +8,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function ApartmentDashboard() {
+export default function MarketStats({ property }: { property: string }) {
+  console.debug(property);
+
   const [timeFrame, setTimeFrame] = useState("today");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [chartData, setChartData] = useState<any>([]);
@@ -93,41 +95,41 @@ export default function ApartmentDashboard() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white">
-      <h1 className="text-2xl font-medium text-gray-700 mb-8">
+    <div>
+      <h1 className="text-lg font-medium text-gray-700 mb-8 -mt-5">
         Cosgrove Greenview Apartments
       </h1>
 
       <div className="grid grid-cols-2 gap-8 mb-8">
         <div>
           <p className="text-gray-500 text-sm">Stock price</p>
-          <p className="text-2xl font-bold">N12,000/ Unit</p>
+          <p className="text-xl font-bold">N12,000/ Unit</p>
         </div>
 
         <div>
           <p className="text-gray-500 text-sm">Unit Available</p>
-          <p className="text-2xl font-bold">12</p>
+          <p className="text-xl font-bold">12</p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-8 mb-12">
         <div className="bg-gray-100 p-6 rounded-lg">
-          <p className="text-gray-700 text-lg mb-2">Current Value</p>
-          <p className="text-3xl font-bold">NGN 1.2B</p>
+          <p className="text-gray-700 text-sm mb-2">Current Value</p>
+          <p className="text-xl font-bold">NGN 1.2B</p>
         </div>
 
         <div className="bg-gray-100 p-6 rounded-lg">
-          <div className="inline-block border border-dotted border-blue-400 px-3 py-1 rounded text-blue-600 mb-2">
+          <div className="inline-block text-sm border border-dotted border-blue-400 px-3 py-1 rounded text-blue-600 mb-2">
             MoM Growth
           </div>
-          <p className="text-3xl font-bold text-black">+10.5%</p>
+          <p className="text-xl font-bold text-black">+10.5%</p>
         </div>
       </div>
 
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Price Trends</h2>
-          <div className="flex space-x-2">
+          <h2 className="text-sm font-bold">Price Trends</h2>
+          <div className="flex space-x-2 text-sm">
             <button
               onClick={() => setTimeFrame("today")}
               className={`px-4 py-2 rounded-full ${timeFrame === "today" ? "bg-yellow-400 text-black" : "bg-gray-100 text-gray-700"}`}

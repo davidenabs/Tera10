@@ -37,9 +37,9 @@ const AssetsTable = () => {
   //     React.useState<VisibilityState>({});
   //   const [rowSelection, setRowSelection] = React.useState({});
 
-  const filteredData = propertyData.filter((record) =>
-    record.property.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredData = propertyData.filter((record) =>
+  //   record.property.toLowerCase().includes(search.toLowerCase())
+  // );
 
   // Table 1 (All)
   const [sorting1, setSorting1] = React.useState<SortingState>([]);
@@ -62,7 +62,7 @@ const AssetsTable = () => {
   );
 
   const table = useReactTable({
-    data: filteredData,
+    data: propertyData,
     columns,
     onSortingChange: setSorting1,
     onColumnFiltersChange: setColumnFilters1,
@@ -164,13 +164,13 @@ const AssetsTable = () => {
                      </TabsTrigger>
          
                      <TabsTrigger
-                       value="cosgroove"
+                       value="flagged"
                        className="data-[state=active]:border-b-2 bg- !shadow-none md:w-[146px] justify-start data-[state=active]:border-b-[#FFAB04] rounded-none py-5 text-[#8E8E93] data-[state=active]:text-black"
                      >
                        Flagged
                      </TabsTrigger>
                      <TabsTrigger
-                       value="cosgroove"
+                       value="draft"
                        className="data-[state=active]:border-b-2 bg- !shadow-none md:w-[146px] justify-start data-[state=active]:border-b-[#FFAB04] rounded-none py-5 text-[#8E8E93] data-[state=active]:text-black"
                      >
                        Draft (2)
@@ -236,6 +236,29 @@ const AssetsTable = () => {
           </div>
           <AppTablePagination table={table} />
         </TabsContent>
+
+        <TabsContent value="flagged">
+          <div className="overflow-auto border border-[#E4E7EC] text-[#475467] rounded-t-lg rounded-b mt-2">
+            <AppTable
+              table={table2}
+              className=""
+              noResultsMessage="No yellow cards found."
+            />
+          </div>
+          <AppTablePagination table={table} />
+        </TabsContent>
+
+        <TabsContent value="draft">
+          <div className="overflow-auto border border-[#E4E7EC] text-[#475467] rounded-t-lg rounded-b mt-2">
+            <AppTable
+              table={table}
+              className=""
+              noResultsMessage="No yellow cards found."
+            />
+          </div>
+          <AppTablePagination table={table} />
+        </TabsContent>
+
       </Tabs>
 
       <AppModal open={open} setOpen={setOpen} title="Property Info">

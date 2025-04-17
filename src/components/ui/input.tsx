@@ -5,20 +5,29 @@ interface InputProps extends React.ComponentProps<"input"> {
   isNumber?: boolean; // Add this prop
 }
 
-function Input({ className, type, isNumber, onChange, ...props }: InputProps) {
+function Input({
+  className,
+  type,
+  isNumber,
+  onChange,
+  id,
+  ...props
+}: InputProps) {
+  const generatedId = React.useId();
+  const inputId = id || generatedId;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isNumber) {
-      // Convert the input value to a number
       const value = e.target.value === "" ? null : Number(e.target.value);
-      onChange?.(value as unknown as React.ChangeEvent<HTMLInputElement>); // Pass the converted value
+      onChange?.(value as unknown as React.ChangeEvent<HTMLInputElement>);
     } else {
-      // Pass the value as-is (string)
       onChange?.(e);
     }
   };
 
   return (
     <input
+      id={inputId}
       type={type}
       data-slot="input"
       className={cn(

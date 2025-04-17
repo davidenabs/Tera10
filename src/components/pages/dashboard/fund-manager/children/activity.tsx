@@ -105,7 +105,7 @@ export default function ActivityDashboard() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {/* Activity Feed */}
-      <Card className="col-span-3 border-gray-200 bg-white rounded-lg shadow-none overflow-hidden">
+      <Card className="md:col-span-3 border-gray-200 bg-white rounded-lg shadow-none overflow-hidden">
         <CardHeader className="p6 flex justify-between items-center border-b border-gray-200">
           <h2 className="text-base font-bold">Recent Activities</h2>
 

@@ -6,7 +6,7 @@ const ForgotPasswordPage = () => {
   usePageTitle("Forgot Password Page");
 
   return (
-    <div className="max-w-2/3 mx-auto pt-20">
+    <div className="sm:max-w-2/3 mx-auto md:pt-20">
       <AuthFormHeader
         title={
           <>

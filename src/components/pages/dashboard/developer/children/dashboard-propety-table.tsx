@@ -22,21 +22,11 @@ import {
 } from "../tables/live-market";
 import { Button } from "@/components/ui/button";
 import AppModal from "@/components/common/modal";
+import MarketStats from "../modals/market-stats";
 
 // export default class DashboardPropertyTable
 const DashboardPropertyTable = () => {
   const [search, setSearch] = React.useState("");
-  //   const [sorting, setSorting] = React.useState<SortingState>([]);
-  //   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-  //     []
-  //   );
-  //   const [columnVisibility, setColumnVisibility] =
-  //     React.useState<VisibilityState>({});
-  //   const [rowSelection, setRowSelection] = React.useState({});
-
-  const filteredData = propertyData.filter((record) =>
-    record.property.toLowerCase().includes(search.toLowerCase())
-  );
 
   // Table 1 (All)
   const [sorting1, setSorting1] = React.useState<SortingState>([]);
@@ -59,7 +49,7 @@ const DashboardPropertyTable = () => {
   );
 
   const table = useReactTable({
-    data: filteredData,
+    data: propertyData,
     columns,
     onSortingChange: setSorting1,
     onColumnFiltersChange: setColumnFilters1,
@@ -103,44 +93,6 @@ const DashboardPropertyTable = () => {
     },
   });
 
-  //   const table = useReactTable({
-  //     data: filteredData,
-  //     columns,
-  //     onSortingChange: setSorting,
-  //     onColumnFiltersChange: setColumnFilters,
-  //     getCoreRowModel: getCoreRowModel(),
-  //     getPaginationRowModel: getPaginationRowModel(),
-  //     getSortedRowModel: getSortedRowModel(),
-  //     getFilteredRowModel: getFilteredRowModel(),
-  //     onColumnVisibilityChange: setColumnVisibility,
-  //     onRowSelectionChange: setRowSelection,
-  //     state: {
-  //       sorting,
-  //       columnFilters,
-  //       columnVisibility,
-  //       rowSelection,
-  //     },
-  //   });
-
-  //   const table2 = useReactTable({
-  //     data: cosgrovePropertyData,
-  //     columns: columns2,
-  //     onSortingChange: setSorting,
-  //     onColumnFiltersChange: setColumnFilters,
-  //     getCoreRowModel: getCoreRowModel(),
-  //     getPaginationRowModel: getPaginationRowModel(),
-  //     getSortedRowModel: getSortedRowModel(),
-  //     getFilteredRowModel: getFilteredRowModel(),
-  //     onColumnVisibilityChange: setColumnVisibility,
-  //     onRowSelectionChange: setRowSelection,
-  //     state: {
-  //       sorting,
-  //       columnFilters,
-  //       columnVisibility,
-  //       rowSelection,
-  //     },
-  //   });
-
   return (
     <div className="col-span-3">
       {/* Tabs */}
@@ -175,7 +127,10 @@ const DashboardPropertyTable = () => {
               placeholder="Search"
               className="pl-10 rounded-xl"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                table.setGlobalFilter(e.target.value);
+              }}
             />
           </div>
           <Button
@@ -213,8 +168,13 @@ const DashboardPropertyTable = () => {
         </TabsContent>
       </Tabs>
 
-      <AppModal open={open} setOpen={setOpen} title="Property Info">
-        <p className="text-gray-700">Property: {selectedProperty}</p>
+      <AppModal
+        open={open}
+        setOpen={setOpen}
+        title="Market Stats"
+        className="sm:max-w-[588px] bg-white"
+      >
+        <MarketStats property={selectedProperty!} />
       </AppModal>
     </div>
   );

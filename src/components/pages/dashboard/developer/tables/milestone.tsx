@@ -106,6 +106,7 @@ export const assetColumns = [
     header: ({ table }) => (
       <input
         type="checkbox"
+          id="select-all-rows"
         checked={table.getIsAllRowsSelected()}
         onChange={(e) => table.toggleAllRowsSelected(!!e.target.checked)}
         aria-label="Select all"
@@ -114,6 +115,7 @@ export const assetColumns = [
     cell: ({ row }) => (
       <input
         type="checkbox"
+        id={`row-select-${row.id}`}
         checked={row.getIsSelected()}
         onChange={(e) => row.toggleSelected(!!e.target.checked)}
         aria-label="Select row"

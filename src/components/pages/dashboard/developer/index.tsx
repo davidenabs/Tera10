@@ -4,7 +4,8 @@ import { Box, DocumentCopy, DocumentText, Star, Wallet } from "iconsax-react";
 import { StatCard } from "./children/stat-card";
 import DashboardPropertyTable from "./children/dashboard-propety-table";
 import { ROUTES } from "@/config/route";
-import { useNavigation } from "@/utils/navigation";
+// import { useNavigation } from "@/utils/navigation";
+import { Link } from "react-router-dom";
 
 const stats = [
   {
@@ -32,7 +33,7 @@ const stats = [
 
 const DeveloperDashboardPage = () => {
   usePageTitle("Developer’s Dashboard");
-  const { goTo } = useNavigation();
+  // const { goTo } = useNavigation();
 
   return (
     <>
@@ -42,12 +43,12 @@ const DeveloperDashboardPage = () => {
           <span>Drafts</span>
         </Button>
 
-        <Button
-          onClick={() => goTo(ROUTES.DASHBOARD.DEVELOPER.ADD_ASSETS)}
-          className="!border-[#EBA10E] border rounded-full text-black"
+        <Link
+          to={ROUTES.DASHBOARD.DEVELOPER.ADD_ASSETS}
+          className="!border-[#EBA10E] bg-yellow-400 border rounded-full text-black p-2 px-2 text-sm"
         >
           Add New
-        </Button>
+        </Link>
       </div>
 
       {/* Dashboard Content */}

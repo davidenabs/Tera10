@@ -29,7 +29,7 @@ const WalletPage = () => {
             currency={"NGN"}
           />
 
-          <div className="bg-white rounded-md border border-gray-200 relative col-span-2">
+          <div className="bg-white rounded-md border border-gray-200 relative md:col-span-2">
             <div className="flex items-center gap-2 text-gray-800 mb-2 py-4 border-b border-gray-200 px-4">
               <Activity size={18} color="#000" />
               <span className="text-sm">{"Quick Actions"}</span>
