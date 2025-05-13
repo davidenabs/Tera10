@@ -7,10 +7,15 @@ import milestone3 from "./milestone-3.png";
 import milestone4 from "./milestone-4.png";
 import authBg from "./auth-bg.svg";
 import appLogo from "./terra-10-logo.svg";
+import appLogoWhite from "./terra-10-logo-white.svg";
 import CROSGROVE from "./CROSGROVE.svg";
 import EmptyBlock from "./empty-block.png";
-// 
-
+import Building from "./building.svg";
+import VectorCriclesPattern from "./vector-circles-pattern.svg";
+import EmailBird from "./email-bird.png";
+import ConsoleBG from "./console-bg.png";
+import ThankyouBg from "./thank-you-bg.png";
+//
 
 const IMAGES = {
   avatar,
@@ -23,7 +28,13 @@ const IMAGES = {
   authBg,
   appLogo,
   CROSGROVE,
-  EmptyBlock
+  EmptyBlock,
+  Building,
+  appLogoWhite,
+  VectorCriclesPattern,
+  EmailBird,
+  ConsoleBG,
+  ThankyouBg,
 };
 
 export default IMAGES;

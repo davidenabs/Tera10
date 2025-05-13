@@ -7,8 +7,42 @@ import Portfolio from "@/features/dashboard/developer/portfolio";
 import Listings from "@/features/dashboard/developer/listings";
 import Wallet from "@/features/dashboard/developer/wallet";
 import Milestone from "@/features/dashboard/developer/milestone";
+import DeveloperOnboardingPage from "@/features/onboarding/developer";
+import DeveloperOnboardingLayout from "@/layouts/developer-onboarding-layout";
+import DeveloperOnboardingVEmailPage from "@/features/onboarding/developer/verify-email";
+import DeveloperOnboardingConsoleOverviewPage from "@/features/onboarding/developer/console";
+import DeveloperOnboardingKYCPage from "@/features/onboarding/developer/kyc";
+import DeveloperOnboardingKYCConfirmationPage from "@/features/onboarding/developer/thank-you";
 
 export const developerRoutes: CustomRouteObject[] = [
+  // Onboarding
+  {
+    path: ROUTES.ONBOARDING.DEVELOPER.EMAIL,
+    element: <DeveloperOnboardingPage />,
+    layout: DeveloperOnboardingLayout,
+  },
+  {
+    path: ROUTES.ONBOARDING.DEVELOPER.VERIFY_EMAIL,
+    element: <DeveloperOnboardingVEmailPage />,
+    layout: DeveloperOnboardingLayout,
+  },
+  {
+    path: ROUTES.ONBOARDING.DEVELOPER.CONSOLE_OVERVIEW,
+    element: <DeveloperOnboardingConsoleOverviewPage />,
+    layout: DeveloperOnboardingLayout,
+  },
+  {
+    path: ROUTES.ONBOARDING.DEVELOPER.KYC,
+    element: <DeveloperOnboardingKYCPage />,
+    layout: DeveloperOnboardingLayout,
+  },
+  {
+    path: ROUTES.ONBOARDING.DEVELOPER.THANK_YOU,
+    element: <DeveloperOnboardingKYCConfirmationPage />,
+    layout: DeveloperOnboardingLayout,
+  },
+
+  // Dashboard
   {
     path: ROUTES.DASHBOARD.DEVELOPER.HOME,
     element: <DeveloperDashboard />,

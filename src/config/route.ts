@@ -9,6 +9,15 @@ export const ROUTES = {
     FORGET_PASSWORD: "/auth/forget-password",
     CHANGE_PASSWORD: "/auth/change-password",
   },
+  ONBOARDING: {
+    DEVELOPER: {
+      EMAIL: `${developerPrefix}/onboarding/email`,
+      VERIFY_EMAIL: `${developerPrefix}/onboarding/v-email`,
+      CONSOLE_OVERVIEW: `${developerPrefix}/onboarding/console-overview`,
+      KYC: `${developerPrefix}/onboarding/kyc`,
+      THANK_YOU: `${developerPrefix}/onboarding/thank-u`,
+    },
+  },
   UNAUTHORIZED: "/unauthorized",
   DASHBOARD: {
     DEVELOPER: {
