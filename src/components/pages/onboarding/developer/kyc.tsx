@@ -18,7 +18,7 @@ const steps = [
 ];
 
 const DeveloperOnboardingKYC = () => {
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(0);
   const { goTo } = useNavigation();
 
   const totalSteps = steps.length;
