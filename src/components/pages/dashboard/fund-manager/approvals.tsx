@@ -1,5 +1,9 @@
 import usePageTitle from "@/hooks/use-page-title";
 import InvestmentCard from "./children/investment-cards";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { User } from "iconsax-react";
+import ApprovalTable from "./children/approval-table";
+import DeveloperProfileReview from "./children/developer-profile";
 
 const ApprovalPage = () => {
   usePageTitle("Approvals");
@@ -36,8 +40,28 @@ const ApprovalPage = () => {
 
   return (
     <>
+     <div className=" flex-1 ">
       {/* Dashboard Content */}
-      <div className=" flex-1 ">
+      <Tabs defaultValue="account" className="">
+        <TabsList className="grid w-full grid-cols-2 bg-[#EEEEF0] rounded-md w-[400px]">
+          <TabsTrigger
+            value="account"
+            className="data-[state=active]:bg-white data-[state=active]:text-black rounded-md"
+          >
+            Milestone Approval
+          </TabsTrigger>
+          <TabsTrigger
+            value="password"
+            className="data-[state=active]:bg-white data-[state=active]:text-black rounded-md"
+          >
+            <User color="#000" size={15}/>
+            <span>Developer Profile Review</span>
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="account"><ApprovalTable /></TabsContent>
+        <TabsContent value="password"><DeveloperProfileReview /></TabsContent>
+      </Tabs>
+      <div className=" flex-1 hidden">
         <div className="space-y-6">
           <div className="p-6max-w-4xl mx-auto">
             {investments.map((investment, index) => (
@@ -54,6 +78,7 @@ const ApprovalPage = () => {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </>
   );

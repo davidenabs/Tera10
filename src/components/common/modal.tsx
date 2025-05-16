@@ -18,6 +18,7 @@ interface AppModalProps {
   children: React.ReactNode;
   className?: string;
   modal?: boolean;
+  showClosIcon?: boolean;
 }
 
 const AppModal: React.FC<AppModalProps> = ({
@@ -27,10 +28,12 @@ const AppModal: React.FC<AppModalProps> = ({
   children,
   className,
   modal = true,
+  showClosIcon = true,
 }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen} modal={modal}>
       <DialogContent
+        showClosIcon={showClosIcon}
         className={cn(
           "sm:max-w-lg w-ull p-0 transition-all duration-300 ease-in-out border-[#D0D5DD]",
           className
